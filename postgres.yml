@@ -1,0 +1,21 @@
+# Configures Postgres and pgAdmin4
+# The Postgres server can be accessed on localhost:5432
+# while the pgAdmin4 is on localhost:5433
+# In pgAdmin4 interface use postgres_server as the server host name
+version: '2'
+services:
+  postgres:
+    image: postgres
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_PASSWORD: secret
+      PGDATA: /var/lib/postgresql/data
+    volumes:
+      - '/var/lib/postgresql/data:/var/lib/postgresql/data'
+  pgadmin4:
+    image: fenglc/pgadmin4
+    ports:
+      - '5433:5050'
+    links:
+      - 'postgres:postgres_server'

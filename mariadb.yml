@@ -1,0 +1,21 @@
+# Configures MariaDB and phpMyAdmin
+# The MariaDB server can be accessed on localhost:3306
+# while the phpMyAdmin is on localhost:3307
+version: '2'
+services:
+  mariadb:
+    image: mariadb
+    ports:
+      - '3306:3306'
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+    volumes:
+      - '/var/lib/mysql:/var/lib/mysql'
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - '3307:80'
+    environment:
+      PMA_HOST: mariadb_server
+    links:
+      - 'mariadb:mariadb_server'

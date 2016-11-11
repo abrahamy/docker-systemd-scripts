@@ -1,0 +1,12 @@
+[Unit]
+Description=PostgreSQL Container
+Requires=docker.service
+After=docker.service
+
+[Service]
+Restart=always
+ExecStart=/usr/bin/docker-compose -f postgres.yml up -d
+ExecStop=/usr/bin/docker-compose -f postgres.yml stop
+
+[Install]
+WantedBy=default.target
